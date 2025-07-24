@@ -1,64 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Emnandilicious Menu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/styles/tailwind.css" rel="stylesheet" />
-    <script src="/scripts/order.js" defer></script>
-  </head>
-  <body class="bg-gray-50 p-4 font-sans">
-    <h1 class="text-2xl font-extrabold mb-6 text-center text-gray-800">Emnandilicious Menu</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TownshipK Eats - Specials</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
 
-    <div id="menu" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      <!-- Kota Special -->
-      <div class="border rounded-2xl p-4 shadow hover:shadow-md transition duration-300 bg-white">
-        <img src="/images/emnandilicious/kota-special.jpg" class="w-full h-48 object-cover rounded-lg" alt="Kota Special">
-        <div class="mt-3">
-          <h2 class="font-semibold text-lg text-gray-800">Kota Special</h2>
-          <p class="text-sm text-gray-500">Polony, cheese, chips & Russian</p>
-          <p class="text-green-700 font-bold mt-1">R35 + R20 Delivery</p>
-          <button onclick="addToCart('Kota Special', 35)" class="mt-3 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full w-full">
-            Add to Cart
-          </button>
-        </div>
+  <header class="bg-yellow-500 text-white text-center py-6 shadow">
+    <h1 class="text-3xl font-bold">TownshipK Eats</h1>
+    <p class="text-lg mt-1">Your favourite Kasi meals, delivered</p>
+  </header>
+
+  <!-- Specials Section -->
+  <section class="mt-10 px-4">
+    <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">Specials</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-white shadow rounded-lg p-4">
+        <img src="static/images/Ribs_and_Chips.jpeg" alt="Ribs and Chips" class="w-full h-48 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-bold text-gray-800">Ribs and Chips</h3>
+        <p class="text-gray-600">Tender ribs served with golden fries and a side of chakalaka.</p>
       </div>
 
-      <!-- Ribs and Chips -->
-      <div class="border rounded-2xl p-4 shadow hover:shadow-md transition duration-300 bg-white">
-        <img src="/images/emnandilicious/Ribs_and_Chips.jpeg" class="w-full h-48 object-cover rounded-lg" alt="Ribs and Chips">
-        <div class="mt-3">
-          <h2 class="font-semibold text-lg text-gray-800">Ribs and Chips</h2>
-          <p class="text-sm text-gray-500">Grilled ribs served with golden chips</p>
-          <p class="text-green-700 font-bold mt-1">R50 + R20 Delivery</p>
-          <button onclick="addToCart('Ribs and Chips', 50)" class="mt-3 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full w-full">
-            Add to Cart
-          </button>
-        </div>
+      <!-- Card 2 -->
+      <div class="bg-white shadow rounded-lg p-4">
+        <img src="static/images/Ribs_and_Chips.jpeg" alt="Ribs and Chips" class="w-full h-48 object-cover rounded-lg mb-4">
+        <h3 class="text-xl font-bold text-gray-800">Ribs and Chips</h3>
+        <p class="text-gray-600">Tender ribs served with golden fries and a side of chakalaka.</p>
       </div>
     </div>
+  </section>
 
-    <!-- Order Preview Button -->
-    <div class="fixed bottom-4 right-4">
-      <button onclick="previewOrder()" class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-full shadow-lg">
-        🛒 View Order
-      </button>
-    </div>
+  <footer class="text-center text-gray-600 text-sm mt-10 py-6">
+    &copy; 2025 TownshipK Eats. All rights reserved.
+  </footer>
 
-    <!-- Order Modal -->
-    <div id="orderModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-      <div class="bg-white rounded-xl w-11/12 max-w-md p-6 shadow-lg">
-        <h3 class="font-bold text-xl mb-4">Order Summary</h3>
-        <div id="orderList" class="text-sm space-y-2 max-h-40 overflow-y-auto"></div>
-        <p class="mt-4 font-semibold">Delivery Fee: R20</p>
-        <p class="font-bold text-lg mt-2" id="totalAmount"></p>
-        <input type="text" id="userName" placeholder="Your name" class="mt-3 w-full border p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
-        <input type="text" id="userAddress" placeholder="Delivery address" class="mt-2 w-full border p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
-        <button onclick="sendWhatsAppOrder()" class="mt-4 bg-green-500 hover:bg-green-600 text-white w-full py-2 rounded-full">
-          📲 Place Order
-        </button>
-        <button onclick="closeModal()" class="mt-2 text-gray-600 hover:text-gray-800 w-full">Cancel</button>
-      </div>
-    </div>
-  </body>
+</body>
 </html>
