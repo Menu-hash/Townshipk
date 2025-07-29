@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" x-data="menuApp()">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emnandilicious Menu</title>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --whatsapp-green: #25D366;
+      --whatsapp-light: #dcf8c6;
+      --whatsapp-dark: #128C7E;
+      --whatsapp-darker: #075E54;
+      --light: #f0f2f5;
+      --dark: #3b4a54;
+      --gray: #667781;
+      --white: #ffffff;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      padding: 0;
+      margin: 0;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    header {
+      background-color: var(--whatsapp-dark);
+      color: white;
+      padding: 1rem 0;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    
+    .sticky-tabs {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--whatsapp-dark);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 10px 0;
+    }
+    
+    .tabs-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    
+    .tabs-container::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .tabs {
+      display: inline-flex;
+      padding: 0 15px;
+      min-width: 100%;
+    }
+    
+    .tab {
+      padding: 8px 16px;
+      margin-right: 8px;
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      background-color: var(--white);
+      color: var(--whatsapp-darker);
+      border: 1px solid var(--whatsapp-light);
+    }
+    
+    .tab:last-child {
+      margin-right: 0;
+    }
+    
+    .tab.active {
+      background-color: var(--whatsapp-darker);
+      color: white;
+      border-color: var(--whatsapp-darker);
+    }
+    
+    .tab:hover:not(.active) {
+      background-color: var(--whatsapp-light);
+    }
+    
+    .content {
+      padding: 20px 0;
+    }
+    
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 0 15px;
+    }
+    
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      }
+    }
+    
+    .product {
+      background-color: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--whatsapp-light);
+    }
+    
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+    
+    .product-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    
+    .product-info {
+      padding: 15px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .product-name {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    
+    .product-category {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+    
+    .product-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--whatsapp-dark);
+      margin-top: auto;
+    }
+    
+    .add-to-cart {
+      width: 100%;
+      padding: 8px;
+      background-color: var(--whatsapp-green);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+    
+    .add-to-cart:hover {
+      background-color: var(--whatsapp-dark);
+    }
+    
+    .cart-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: var(--whatsapp-green);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 90;
+      transition: transform 0.3s ease;
+    }
+    
+    .cart-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: var(--whatsapp-darker);
+      color: white;
+      font-size: 12px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 15px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .modal-content {
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    
+    .modal.active .modal-content {
+      transform: translateY(0);
+    }
+    
+    .modal h2 {
+      margin-bottom: 20px;
+      color: var(--dark);
+      font-size: 1.5rem;
+    }
+    
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--whatsapp-light);
+      padding-bottom: 10px;
+    }
+    
+    .back-btn {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--whatsapp-dark);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .cart-item-info {
+      flex-grow: 1;
+    }
+    
+    .cart-item-name {
+      font-weight: 500;
+    }
+    
+    .cart-item-price {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .qty-btn {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: var(--whatsapp-green);
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .qty-input {
+      width: 40px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 2px;
+    }
+    
+    .delete-btn {
+      color: #e74c3c;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    
+    .cart-total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 20px 0;
+      text-align: right;
+      color: var(--dark);
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      width: 100%;
+    }
+    
+    .btn-primary {
+      background-color: var(--whatsapp-green);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--whatsapp-dark);
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: inherit;
+    }
+    
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    
+    .delivery-info {
+      background-color: var(--whatsapp-light);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border-left: 4px solid var(--whatsapp-green);
+    }
+    
+    .empty-cart {
+      text-align: center;
+      padding: 30px;
+      color: var(--gray);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Emnandilicious</h1>
+    </div>
+  </header>
+  
+  <div class="sticky-tabs">
+    <div class="tabs-container">
+      <div class="tabs">
+        <div class="tab" :class="{ 'active': activeCategory === 'All' }" @click="filterCategory('All')">All</div>
+        <template x-for="cat in categories">
+          <div class="tab" :class="{ 'active': activeCategory === cat }" @click="filterCategory(cat)" x-text="cat"></div>
+        </template>
+      </div>
+    </div>
+  </div>
+  
+  <div class="content">
+    <div class="container">
+      <div class="product-grid">
+        <template x-for="item in filteredProducts" :key="item.name">
+          <div class="product">
+            <img class="product-img" :src="item.image" :alt="item.name" loading="lazy">
+            <div class="product-info">
+              <h3 class="product-name" x-text="item.name"></h3>
+              <div class="product-category" x-text="item.category"></div>
+              <div class="product-price" x-text="'R' + item.price"></div>
+              <button class="add-to-cart" @click="addToCart(item)">Add to Cart</button>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+  
+  <div class="cart-btn" @click="showCart = true">
+    🛒
+    <span class="cart-badge" x-show="cart.length > 0" x-text="cart.length"></span>
+  </div>
+  
+  <div class="modal" :class="{ 'active': showCart }" @click.self="showCart = false">
+    <div class="modal-content">
+      <div class="cart-header">
+        <button class="back-btn" @click="showCart = false">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <h2>Your Cart</h2>
+        <div style="width: 40px;"></div>
+      </div>
+      
+      <template x-if="cart.length === 0">
+        <div class="empty-cart">
+          <p>Your cart is empty</p>
+        </div>
+      </template>
+      
+      <template x-for="(item, index) in cart" :key="index">
+        <div class="cart-item">
+          <div class="cart-item-info">
+            <div class="cart-item-name" x-text="item.name"></div>
+            <div class="cart-item-price" x-text="'R' + (item.price * item.qty)"></div>
+          </div>
+          <div class="cart-item-controls">
+            <div class="quantity-controls">
+              <button class="qty-btn" @click="decrementQty(item)">-</button>
+              <input type="number" min="1" class="qty-input" x-model="item.qty" @change="validateQty(item)">
+              <button class="qty-btn" @click="incrementQty(item)">+</button>
+            </div>
+            <button class="delete-btn" @click="removeFromCart(item)" title="Remove item">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </template>
+      
+      <template x-if="cart.length > 0">
+        <div>
+          <div class="delivery-info">
+            <p><strong>Delivery Fee: R15</strong></p>
+            <p><strong>Total with Delivery: R<span x-text="totalPrice() + 15"></span></strong></p>
+          </div>
+          <button class="btn btn-primary" @click="showForm = true; showCart = false">Proceed to Checkout</button>
+        </div>
+      </template>
+    </div>
+  </div>
+  
+  <div class="modal" :class="{ 'active': showForm }" @click.self="showForm = false">
+    <div class="modal-content">
+      <h2>Complete Your Order</h2>
+      <form @submit.prevent="sendWhatsApp">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" x-model="user.name" required>
+        </div>
+        
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" x-model="user.phone" required>
+        </div>
+        
+        <div class="form-group">
+          <label>Address</label>
+          <textarea x-model="user.address" required></textarea>
+        </div>
+        
+        <div class="delivery-info">
+          <p><strong>Subtotal: R<span x-text="totalPrice()"></span></strong></p>
+          <p><strong>Delivery Fee: R15</strong></p>
+          <p><strong>Total: R<span x-text="totalPrice() + 15"></span></strong></p>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Send Order via WhatsApp</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function menuApp() {
+      return {
+        categories: [
+          'Kota', 'Combos', 'Budget Meals', 'Family Meals', 'Sides', 'Chips', 'Wings Combos'
+        ],
+        products: [
+          { name: '10 Wings and Chips', price: 100, category: 'Wings Combos', image: 'static/images/emnandilicious/10 Wings_and_Chips.jpeg' },
+          { name: '2 Fish and Chips', price: 65, category: 'Combos', image: 'static/images/emnandilicious/2_Fish_and_Chips.jpeg' },
+          { name: '4 Wings and Chips', price: 60, category: 'Wings Combos', image: 'static/images/emnandilicious/4_Wings_and_Chips.jpeg' },
+          { name: '6 Wings and Chips', price: 70, category: 'Wings Combos', image: 'static/images/emnandilicious/6_Wings_and_Chips.jpeg' },
+          { name: '8 Wings 8 Ribs and Chips', price: 220, category: 'Wings Combos', image: 'static/images/emnandilicious/8_Wings_8Ribs_and_Chips.jpeg' },
+          { name: '8 Wings and Chips', price: 85, category: 'Wings Combos', image: 'static/images/emnandilicious/8_Wings_and_Chips.jpeg' },
+          { name: 'Burger and Chips', price: 30, category: 'Budget Meals', image: 'static/images/emnandilicious/Burger_and_Chips.jpg' },
+          { name: 'Family Combo', price: 200, category: 'Family Meals', image: 'static/images/emnandilicious/Family combo.jpg' },
+          { name: 'Fish and Chips', price: 45, category: 'Budget Meals', image: 'static/images/emnandilicious/Fish_and_Chips.jpeg' },
+          { name: 'Foot Long Russian', price: 35, category: 'Sides', image: 'static/images/emnandilicious/Foot_Long_Russian.jpeg' },
+          { name: 'Foot Spot', price: 50, category: 'Chips', image: 'static/images/emnandilicious/Foot_Spot.jpg' },
+          { name: 'Gimba', price: 60, category: 'Kota', image: 'static/images/emnandilicious/Gimba.jpg' },
+          { name: 'Green Salad', price: 30, category: 'Sides', image: 'static/images/emnandilicious/Green_Salad.jpeg' },
+          { name: 'Large Chips', price: 60, category: 'Chips', image: 'static/images/emnandilicious/Large_Chips.jpeg' },
+          { name: 'Long Foot Vienna and Chips', price: 45, category: 'Budget Meals', image: 'static/images/emnandilicious/Long_Foot_Vienna_and_Chips.jpeg' },
+          { name: 'Long Russian and Chips', price: 50, category: 'Budget Meals', image: 'static/images/emnandilicious/Long_Russian_and_Chips.png' },
+          { name: 'Medium Chips', price: 50, category: 'Chips', image: 'static/images/emnandilicious/Medium_Chips.jpeg' },
+          { name: 'Nuggets With Sauce', price: 35, category: 'Sides', image: 'static/images/emnandilicious/Nuggets_With_Sauce.jpeg' },
+          { name: 'Nuggets and Chips', price: 40, category: 'Budget Meals', image: 'static/images/emnandilicious/Nuggets_and_Chips.jpeg' },
+          { name: 'Pops With Sauce', price: 30, category: 'Sides', image: 'static/images/emnandilicious/Pops_With_Sauce.jpeg' },
+          { name: 'Small Chips', price: 24, category: 'Chips', image: 'static/images/emnandilicious/Small_Chips.jpeg' },
+          { name: 'Small Russian Small Fish and Chips', price: 65, category: 'Combos', image: 'static/images/emnandilicious/Small_Russian_Small_Fish_and_Chips.jpeg' },
+          { name: 'Supermega', price: 55, category: 'Kota', image: 'static/images/emnandilicious/Supermega.jpg' },
+          { name: 'Foot Long Vienna', price: 30, category: 'Sides', image: 'static/images/emnandilicious/foot_long_vienna.jpeg' }
+        ],
+        activeCategory: 'All',
+        cart: [],
+        showCart: false,
+        showForm: false,
+        user: { name: '', phone: '', address: '' },
+        filterCategory(cat) { 
+          this.activeCategory = cat;
+          window.scrollTo({ top: document.querySelector('.content').offsetTop - 20, behavior: 'smooth' });
+        },
+        get filteredProducts() {
+          return this.activeCategory === 'All'
+            ? this.products
+            : this.products.filter(p => p.category === this.activeCategory);
+        },
+        addToCart(product) {
+          let found = this.cart.find(i => i.name === product.name);
+          if (found) {
+            found.qty += 1;
+          } else {
+            this.cart.push({ ...product, qty: 1 });
+          }
+          
+          const btn = event.target;
+          btn.textContent = '✓ Added';
+          setTimeout(() => {
+            btn.textContent = 'Add to Cart';
+          }, 1000);
+        },
+        incrementQty(item) {
+          item.qty += 1;
+        },
+        decrementQty(item) {
+          if (item.qty > 1) {
+            item.qty -= 1;
+          } else {
+            this.removeFromCart(item);
+          }
+        },
+        removeFromCart(item) {
+          this.cart = this.cart.filter(cartItem => cartItem.name !== item.name);
+        },
+        validateQty(item) {
+          if (item.qty < 1 || isNaN(item.qty)) {
+            item.qty = 1;
+          }
+        },
+        totalPrice() {
+          return this.cart.reduce((total, item) => total + (item.price * item.qty), 0);
+        },
+        sendWhatsApp() {
+          const items = this.cart.map(i => `${i.qty}× ${i.name} - R${i.price * i.qty}`).join('%0A');
+          const message = `*New Order from Emnandilicious Menu*%0A%0A*Items:*%0A${items}%0A%0A*Delivery Fee:* R15%0A*Total:* R${this.totalPrice() + 15}%0A%0A*Customer Details*%0AName: ${this.user.name}%0APhone: ${this.user.phone}%0AAddress: ${this.user.address}`;
+          window.open(`https://wa.me/27738263857?text=${encodeURIComponent(message)}`, '_blank');
+          
+          this.showForm = false;
+          this.cart = [];
+          this.user = { name: '', phone: '', address: '' };
+        }
+      }
+    }
+  </script>
+</body>
+</html>
