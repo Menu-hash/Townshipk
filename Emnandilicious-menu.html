@@ -18,13 +18,13 @@
       --gray: #667781;
       --white: #ffffff;
     }
-    
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    
+
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--light);
@@ -33,13 +33,13 @@
       margin: 0;
       line-height: 1.6;
     }
-    
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 15px;
     }
-    
+
     header {
       background-color: var(--whatsapp-dark);
       color: white;
@@ -47,12 +47,12 @@
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    
+
     h1 {
       font-size: 2rem;
       font-weight: 700;
     }
-    
+
     .sticky-tabs {
       position: sticky;
       top: 0;
@@ -61,23 +61,23 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       padding: 10px 0;
     }
-    
+
     .tabs-container {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
-    
+
     .tabs-container::-webkit-scrollbar {
       display: none;
     }
-    
+
     .tabs {
       display: inline-flex;
       padding: 0 15px;
       min-width: 100%;
     }
-    
+
     .tab {
       padding: 8px 16px;
       margin-right: 8px;
@@ -91,38 +91,38 @@
       color: var(--whatsapp-darker);
       border: 1px solid var(--whatsapp-light);
     }
-    
+
     .tab:last-child {
       margin-right: 0;
     }
-    
+
     .tab.active {
       background-color: var(--whatsapp-darker);
       color: white;
       border-color: var(--whatsapp-darker);
     }
-    
+
     .tab:hover:not(.active) {
       background-color: var(--whatsapp-light);
     }
-    
+
     .content {
       padding: 20px 0;
     }
-    
+
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
       padding: 0 15px;
     }
-    
+
     @media (max-width: 768px) {
       .product-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       }
     }
-    
+
     .product {
       background-color: var(--white);
       border-radius: 12px;
@@ -133,32 +133,32 @@
       flex-direction: column;
       border: 1px solid var(--whatsapp-light);
     }
-    
+
     .product:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 15px rgba(0,0,0,0.1);
     }
-    
+
     .product-img {
       width: 100%;
       height: 180px;
       object-fit: cover;
     }
-    
+
     .product-info {
       padding: 15px;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
     }
-    
+
     .product-name {
       font-size: 1rem;
       font-weight: 600;
       margin-bottom: 8px;
       color: var(--dark);
     }
-    
+
     .product-category {
       font-size: 0.8rem;
       color: var(--gray);
@@ -171,7 +171,7 @@
       color: var(--whatsapp-dark);
       margin-top: auto;
     }
-    
+
     .add-to-cart {
       width: 100%;
       padding: 8px;
@@ -207,11 +207,11 @@
       z-index: 90;
       transition: transform 0.3s ease;
     }
-    
+
     .cart-btn:hover {
       transform: scale(1.1);
     }
-    
+
     .cart-badge {
       position: absolute;
       top: -5px;
@@ -226,7 +226,7 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     .modal {
       position: fixed;
       inset: 0;
@@ -245,7 +245,7 @@
       opacity: 1;
       pointer-events: all;
     }
-    
+
     .modal-content {
       background-color: white;
       padding: 25px;
@@ -257,17 +257,17 @@
       transform: translateY(20px);
       transition: transform 0.3s ease;
     }
-    
+
     .modal.active .modal-content {
       transform: translateY(0);
     }
-    
+
     .modal h2 {
       margin-bottom: 20px;
       color: var(--dark);
       font-size: 1.5rem;
     }
-    
+
     .cart-header {
       display: flex;
       justify-content: space-between;
@@ -296,26 +296,26 @@
       padding: 10px 0;
       border-bottom: 1px solid #eee;
     }
-    
+
     .cart-item-info {
       flex-grow: 1;
     }
-    
+
     .cart-item-name {
       font-weight: 500;
     }
-    
+
     .cart-item-price {
       color: var(--gray);
       font-size: 0.9rem;
     }
-    
+
     .cart-item-controls {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    
+
     .quantity-controls {
       display: flex;
       align-items: center;
@@ -335,7 +335,7 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     .qty-input {
       width: 40px;
       text-align: center;
@@ -343,7 +343,7 @@
       border-radius: 4px;
       padding: 2px;
     }
-    
+
     .delete-btn {
       color: #e74c3c;
       background: none;
@@ -351,7 +351,7 @@
       cursor: pointer;
       font-size: 1rem;
     }
-    
+
     .cart-total {
       font-size: 1.2rem;
       font-weight: 700;
@@ -359,7 +359,7 @@
       text-align: right;
       color: var(--dark);
     }
-    
+
     .btn {
       padding: 10px 20px;
       border-radius: 6px;
@@ -369,16 +369,16 @@
       border: none;
       width: 100%;
     }
-    
+
     .btn-primary {
       background-color: var(--whatsapp-green);
       color: white;
     }
-    
+
     .btn-primary:hover {
       background-color: var(--whatsapp-dark);
     }
-    
+
     .form-group {
       margin-bottom: 15px;
     }
@@ -388,7 +388,7 @@
       margin-bottom: 5px;
       font-weight: 500;
     }
-    
+
     input, textarea {
       width: 100%;
       padding: 10px;
@@ -396,7 +396,7 @@
       border-radius: 6px;
       font-family: inherit;
     }
-    
+
     textarea {
       min-height: 80px;
       resize: vertical;
@@ -409,7 +409,7 @@
       margin: 15px 0;
       border-left: 4px solid var(--whatsapp-green);
     }
-    
+
     .empty-cart {
       text-align: center;
       padding: 30px;
@@ -423,7 +423,7 @@
       <h1>Emnandilicious</h1>
     </div>
   </header>
-  
+
   <div class="sticky-tabs">
     <div class="tabs-container">
       <div class="tabs">
@@ -434,7 +434,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="content">
     <div class="container">
       <div class="product-grid">
@@ -452,12 +452,12 @@
       </div>
     </div>
   </div>
-  
+
   <div class="cart-btn" @click="showCart = true">
     🛒
     <span class="cart-badge" x-show="cart.length > 0" x-text="cart.length"></span>
   </div>
-  
+
   <div class="modal" :class="{ 'active': showCart }" @click.self="showCart = false">
     <div class="modal-content">
       <div class="cart-header">
@@ -467,13 +467,13 @@
         <h2>Your Cart</h2>
         <div style="width: 40px;"></div>
       </div>
-      
+
       <template x-if="cart.length === 0">
         <div class="empty-cart">
           <p>Your cart is empty</p>
         </div>
       </template>
-      
+
       <template x-for="(item, index) in cart" :key="index">
         <div class="cart-item">
           <div class="cart-item-info">
@@ -492,7 +492,7 @@
           </div>
         </div>
       </template>
-      
+
       <template x-if="cart.length > 0">
         <div>
           <div class="delivery-info">
@@ -504,7 +504,7 @@
       </template>
     </div>
   </div>
-  
+
   <div class="modal" :class="{ 'active': showForm }" @click.self="showForm = false">
     <div class="modal-content">
       <h2>Complete Your Order</h2>
@@ -513,23 +513,23 @@
           <label>Name</label>
           <input type="text" x-model="user.name" required>
         </div>
-        
+
         <div class="form-group">
           <label>Phone</label>
           <input type="tel" x-model="user.phone" required>
         </div>
-        
+
         <div class="form-group">
           <label>Address</label>
           <textarea x-model="user.address" required></textarea>
         </div>
-        
+
         <div class="delivery-info">
           <p><strong>Subtotal: R<span x-text="totalPrice()"></span></strong></p>
           <p><strong>Delivery Fee: R15</strong></p>
           <p><strong>Total: R<span x-text="totalPrice() + 15"></span></strong></p>
         </div>
-        
+
         <button type="submit" class="btn btn-primary">Send Order via WhatsApp</button>
       </form>
     </div>
@@ -572,7 +572,7 @@
         showCart: false,
         showForm: false,
         user: { name: '', phone: '', address: '' },
-        filterCategory(cat) { 
+        filterCategory(cat) {
           this.activeCategory = cat;
           window.scrollTo({ top: document.querySelector('.content').offsetTop - 20, behavior: 'smooth' });
         },
@@ -588,7 +588,7 @@
           } else {
             this.cart.push({ ...product, qty: 1 });
           }
-          
+
           const btn = event.target;
           btn.textContent = '✓ Added';
           setTimeout(() => {
@@ -617,10 +617,20 @@
           return this.cart.reduce((total, item) => total + (item.price * item.qty), 0);
         },
         sendWhatsApp() {
-          const items = this.cart.map(i => `${i.qty}× ${i.name} - R${i.price * i.qty}`).join('%0A');
-          const message = `*New Order from Emnandilicious Menu*%0A%0A*Items:*%0A${items}%0A%0A*Delivery Fee:* R15%0A*Total:* R${this.totalPrice() + 15}%0A%0A*Customer Details*%0AName: ${this.user.name}%0APhone: ${this.user.phone}%0AAddress: ${this.user.address}`;
-          window.open(`https://wa.me/27738263857?text=${encodeURIComponent(message)}`, '_blank');
+          const items = this.cart
+            .map(i => `${i.qty}× ${i.name} - R${i.price * i.qty}`)
+            .join('\n');
+
+          const message = `*New Order from Emnandilicious Menu*\n\n` +
+                        `*Items:*\n${items}\n\n` +
+                        `*Delivery Fee:* R15\n` +
+                        `*Total:* R${this.totalPrice() + 15}\n\n` +
+                        `*Customer Details*\n` +
+                        `Name: ${this.user.name}\n` +
+                        `Phone: ${this.user.phone}\n` +
+                        `Address: ${this.user.address}`;
           
+          window.open(`https://wa.me/27738263857?text=${encodeURIComponent(message)}`, '_blank');
           this.showForm = false;
           this.cart = [];
           this.user = { name: '', phone: '', address: '' };
