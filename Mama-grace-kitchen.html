@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" x-data="menuApp()" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Mama Grace Kitchen Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <header class="bg-yellow-500 text-white text-center py-6 shadow">
+    <h1 class="text-3xl font-bold">Mama Grace Kitchen</h1>
+    <p class="text-lg mt-1">13 Nkosi Street, Kwa Thema</p>
+  </header>
+
+  <!-- Category Tabs -->
+  <div class="px-4 mt-6">
+    <div class="flex flex-wrap gap-2 justify-center mb-6">
+      <button class="px-4 py-2 rounded bg-yellow-500 text-white" @click="filter = 'All'">All</button>
+      <template x-for="cat in categories">
+        <button class="px-4 py-2 rounded bg-gray-200 hover:bg-yellow-500 hover:text-white" @click="filter = cat" x-text="cat"></button>
+      </template>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  <section class="px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <template x-for="item in filteredProducts()" :key="item.name">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <img :src="item.image" :alt="item.name" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold text-gray-900" x-text="item.name"></h3>
+            <p class="text-sm text-gray-600" x-text="item.description"></p>
+            <div class="flex justify-between items-center mt-4">
+              <span class="text-yellow-600 font-bold text-lg" x-text="'R' + item.price"></span>
+              <a :href="`https://wa.me/27XXXXXXXXX?text=I'd like to order: ${item.name} (R${item.price}) + R20 delivery`"
+                 class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 text-sm">
+                Add
+              </a>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <footer class="text-center text-gray-600 text-sm mt-10 py-6">
+    &copy; 2025 Mama Grace Kitchen. All rights reserved.
+  </footer>
+
+  <script>
+    function menuApp() {
+      return {
+        filter: 'All',
+        categories: [
+          'Breakfast', 'Side\'s', 'Combos', 'Family meals',
+          'Budget meals', 'Wings combos', 'Chicken&Braai mix',
+          'Kota&plates', 'Chips'
+        ],
+        products: [
+          { name: 'Chocolate Biscuits', image: 'static/images/Chocolate_biscuits.jpg', price: 30, category: 'Breakfast', description: 'Crunchy biscuits with rich chocolate flavor.' },
+          { name: 'Chocolate Cake', image: 'static/images/Chocolate_cake.jpeg', price: 35, category: 'Breakfast', description: 'Moist chocolate cake topped with fudge.' },
+          { name: 'Fish and Chips', image: 'static/images/Fish_and_chips.jpeg', price: 60, category: 'Combos', description: 'Golden fried fish served with crispy chips.' },
+          { name: 'Food Platter', image: 'static/images/Food_Platter.jpeg', price: 120, category: 'Family meals', description: 'Mix of meats, sides and sauces for 4 people.' },
+          { name: 'Pie and Coke', image: 'static/images/Pie_and_coke.jpeg', price: 45, category: 'Budget meals', description: 'Steak pie with a refreshing can of Coke.' },
+          { name: 'Footlong Russian', image: 'static/images/Footlong_russian.jpeg', price: 40, category: 'Kota&plates', description: 'Giant Russian sausage in a soft bun.' },
+          { name: 'Gimba', image: 'static/images/Gimba.jpg', price: 25, category: 'Chips', description: 'Spicy fried chips with seasoning.' },
+          { name: 'Flying Fish', image: 'static/images/Flying_Fish.jpeg', price: 30, category: 'Side\'s', description: 'Chilled alcoholic lemon-flavored drink.' },
+          { name: 'KFC Flavour', image: 'static/images/KFC_Flavour.jpeg', price: 55, category: 'Chicken&Braai mix', description: 'Zinger-style seasoned chicken fillets.' },
+          { name: 'Pepsi 2L', image: 'static/images/Pepsi_2litre.webp', price: 32, category: 'Side\'s', description: '2L Pepsi for the whole family.' },
+          { name: 'Pepper Steak Pie', image: 'static/images/Pepper_steak.jpeg', price: 38, category: 'Budget meals', description: 'Hearty pepper steak pie with gravy.' },
+          { name: 'Combo Meals', image: 'static/images/Combo_meals.jpg', price: 75, category: 'Combos', description: 'Includes drink, chips, and main of your choice.' },
+        ],
+        filteredProducts() {
+          if (this.filter === 'All') return this.products;
+          return this.products.filter(p => p.category === this.filter);
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
