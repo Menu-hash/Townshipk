@@ -18,7 +18,7 @@
       --gray: #667781;
       --white: #ffffff;
     }
-
+    
     * {
       box-sizing: border-box;
       margin: 0;
@@ -29,8 +29,6 @@
       font-family: 'Poppins', sans-serif;
       background-color: var(--light);
       color: var(--dark);
-      padding: 0;
-      margin: 0;
       line-height: 1.6;
     }
 
@@ -41,16 +39,38 @@
     }
 
     header {
-      background-color: var(--whatsapp-dark);
-      color: white;
-      padding: 1rem 0;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
     }
 
-    h1 {
-      font-size: 2rem;
+    .header-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .header-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 3rem;
       font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      text-align: center;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        height: 150px;
+      }
+      .header-text {
+        font-size: 2rem;
+      }
     }
 
     .sticky-tabs {
@@ -164,7 +184,7 @@
       color: var(--gray);
       margin-bottom: 10px;
     }
-    
+
     .product-price {
       font-size: 1.1rem;
       font-weight: 700;
@@ -184,11 +204,11 @@
       transition: background-color 0.3s ease;
       margin-top: 10px;
     }
-    
+
     .add-to-cart:hover {
       background-color: var(--whatsapp-dark);
     }
-    
+
     .cart-btn {
       position: fixed;
       bottom: 25px;
@@ -240,7 +260,7 @@
       pointer-events: none;
       transition: opacity 0.3s ease;
     }
-    
+
     .modal.active {
       opacity: 1;
       pointer-events: all;
@@ -276,7 +296,7 @@
       border-bottom: 1px solid var(--whatsapp-light);
       padding-bottom: 10px;
     }
-    
+
     .back-btn {
       background: none;
       border: none;
@@ -288,7 +308,7 @@
       align-items: center;
       gap: 5px;
     }
-    
+
     .cart-item {
       display: flex;
       justify-content: space-between;
@@ -321,7 +341,7 @@
       align-items: center;
       gap: 5px;
     }
-    
+
     .qty-btn {
       width: 25px;
       height: 25px;
@@ -382,7 +402,7 @@
     .form-group {
       margin-bottom: 15px;
     }
-    
+
     label {
       display: block;
       margin-bottom: 5px;
@@ -401,7 +421,7 @@
       min-height: 80px;
       resize: vertical;
     }
-    
+
     .delivery-info {
       background-color: var(--whatsapp-light);
       padding: 15px;
@@ -419,9 +439,8 @@
 </head>
 <body>
   <header>
-    <div class="container">
-      <h1>Emnandilicious</h1>
-    </div>
+    <img src="static/images/emnandilicious/Gimba.jpg" alt="Emnandilicious" class="header-image">
+    <div class="header-text">Emnandilicious Menu</div>
   </header>
 
   <div class="sticky-tabs">
@@ -467,7 +486,6 @@
         <h2>Your Cart</h2>
         <div style="width: 40px;"></div>
       </div>
-
       <template x-if="cart.length === 0">
         <div class="empty-cart">
           <p>Your cart is empty</p>
@@ -506,17 +524,16 @@
   </div>
 
   <div class="modal" :class="{ 'active': showForm }" @click.self="showForm = false">
-  <div class="modal-content">
-  <button class="back-btn" @click="showForm = false; showCart = true">
-    <i class="fas fa-arrow-left"></i> Back
-  </button>
-  <h2>Complete Your Order</h2>
+    <div class="modal-content">
+      <button class="back-btn" @click="showForm = false; showCart = true">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <h2>Complete Your Order</h2>
       <form @submit.prevent="sendWhatsApp">
         <div class="form-group">
           <label>Name</label>
           <input type="text" x-model="user.name" required>
         </div>
-
         <div class="form-group">
           <label>Phone</label>
           <input type="tel" x-model="user.phone" required>
@@ -626,13 +643,13 @@
 
           const message = `*New Order from Emnandilicious Menu*\n\n` +
                         `*Items:*\n${items}\n\n` +
-                        `*Delivery Fee:* R15\n` +
+                        `*Delivery Fee:* R20\n` +
                         `*Total:* R${this.totalPrice() + 15}\n\n` +
                         `*Customer Details*\n` +
                         `Name: ${this.user.name}\n` +
                         `Phone: ${this.user.phone}\n` +
                         `Address: ${this.user.address}`;
-          
+
           window.open(`https://wa.me/27738263857?text=${encodeURIComponent(message)}`, '_blank');
           this.showForm = false;
           this.cart = [];
