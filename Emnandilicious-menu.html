@@ -546,8 +546,8 @@
 
         <div class="delivery-info">
           <p><strong>Subtotal: R<span x-text="totalPrice()"></span></strong></p>
-          <p><strong>Delivery Fee: R15</strong></p>
-          <p><strong>Total: R<span x-text="totalPrice() + 15"></span></strong></p>
+          <p><strong>Delivery Fee: R20</strong></p>
+          <p><strong>Total: R<span x-text="totalPrice() + 20"></span></strong></p>
         </div>
 
         <button type="submit" class="btn btn-primary">Send Order via WhatsApp</button>
@@ -559,17 +559,20 @@
     function menuApp() {
       return {
         categories: [
-          'Kota', 'Combos', 'Budget Meals', 'Family Meals', 'Sides', 'Chips', 'Wings Combos'
+          'Kota', 'Combos', 'Budget Meals', 'Family Meals', 'Chicken', 'Sides', 'Chips', 'Wings Combos'
         ],
         products: [
           { name: '10 Wings and Chips', price: 100, category: 'Wings Combos', image: 'static/images/emnandilicious/10 Wings_and_Chips.jpeg' },
           { name: '2 Fish and Chips', price: 65, category: 'Combos', image: 'static/images/emnandilicious/2_Fish_and_Chips.jpeg' },
           { name: '4 Wings and Chips', price: 60, category: 'Wings Combos', image: 'static/images/emnandilicious/4_Wings_and_Chips.jpeg' },
-          { name: '6 Wings and Chips', price: 70, category: 'Wings Combos', image: 'static/images/emnandilicious/6_Wings_and_Chips.jpeg' },
+          { name: 'Full Chicken', price: 110, category: 'Chicken', image: 'static/images/emnandilicious/Full_Chicken.png' },
+	  { name: 'Half Chicken', price: 55, category: 'Chicken', image: 'static/images/emnandilicious/Half_Chicken.png' },
+	  { name: '6 Wings and Chips', price: 70, category: 'Wings Combos', image: 'static/images/emnandilicious/6_Wings_and_Chips.jpeg' },
           { name: '8 Wings 8 Ribs and Chips', price: 220, category: 'Wings Combos', image: 'static/images/emnandilicious/8_Wings_8Ribs_and_Chips.jpeg' },
           { name: '8 Wings and Chips', price: 85, category: 'Wings Combos', image: 'static/images/emnandilicious/8_Wings_and_Chips.jpeg' },
           { name: 'Burger and Chips', price: 30, category: 'Budget Meals', image: 'static/images/emnandilicious/Burger_and_Chips.jpg' },
-          { name: 'Family Combo', price: 200, category: 'Family Meals', image: 'static/images/emnandilicious/Family combo.jpg' },
+          { name: '2 Russians and Chips', price: 65, category: 'Combos', image: 'static/images/emnandilicious/2_Russians_and_Chips.jpeg' },
+	  { name: 'Family Combo', price: 200, category: 'Family Meals', image: 'static/images/emnandilicious/Family combo.jpg' },
           { name: 'Fish and Chips', price: 45, category: 'Budget Meals', image: 'static/images/emnandilicious/Fish_and_Chips.jpeg' },
           { name: 'Foot Long Russian', price: 35, category: 'Sides', image: 'static/images/emnandilicious/Foot_Long_Russian.jpeg' },
           { name: 'Foot Spot', price: 50, category: 'Chips', image: 'static/images/emnandilicious/Foot_Spot.jpg' },
