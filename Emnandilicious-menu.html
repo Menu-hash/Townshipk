@@ -447,21 +447,73 @@
   </style>
 </head>	
 <body>
-  <header>
-    <img src="static/images/emnandilicious/Gimba.jpg" alt="Emnandilicious" class="header-image">
-    <div class="header-text">Emnandilicious Menu</div>
+
+<!-- SCROLL LOGIC CONTAINER -->
+<div 
+  x-data="{
+    lastScroll: 0,
+    showSticky: true,
+    onScroll() {
+      const current = window.scrollY;
+      this.showSticky = current < this.lastScroll || current < 50;
+      this.lastScroll = current;
+    }
+  }"
+  x-init="window.addEventListener('scroll', onScroll)"
+  class="sticky-wrapper"
+  style="position: relative;"
+>
+
+  <!-- STICKY HEADER -->
+  <header 
+    x-show="showSticky"
+    style="position: sticky; top: 0; z-index: 50; background-color: black; text-align: center; padding: 1rem; color: white;"
+  >
+    <img 
+      src="static/images/emnandilicious/Gimba.jpg" 
+      alt="Emnandilicious" 
+      style="max-width: 100%; height: auto;"
+    >
+
+    <div style="font-size: 1.5rem; font-weight: bold;">Emnandilicious Menu</div>
+
+    <div style="font-size: 0.85rem; margin-top: 0.2rem; display: flex; align-items: center; justify-content: center;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white" viewBox="0 0 16 16" style="margin-right: 5px;">
+        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+      </svg>
+      <span>Noto Shell, Thema Road, Kwa-Thema</span>
+    </div>
   </header>
 
-  <div class="sticky-tabs">
+  <!-- STICKY TABS -->
+  <div 
+    x-show="showSticky" 
+    style="position: sticky; top: 130px; z-index: 40; background: white;"
+  >
     <div class="tabs-container">
-      <div class="tabs">
-        <div class="tab" :class="{ 'active': activeCategory === 'All' }" @click="filterCategory('All')">All</div>
-        <template x-for="cat in categories">
-          <div class="tab" :class="{ 'active': activeCategory === cat }" @click="filterCategory(cat)" x-text="cat"></div>
+      <div class="tabs" style="display: flex; justify-content: center; padding: 0.5rem;">
+        <div 
+          class="tab" 
+          :class="{ 'active': activeCategory === 'All' }" 
+          @click="filterCategory('All')"
+        >
+          All
+        </div>
+        <template x-for="cat in categories" :key="cat">
+          <div 
+            class="tab" 
+            :class="{ 'active': activeCategory === cat }" 
+            @click="filterCategory(cat)" 
+            x-text="cat"
+          ></div>
         </template>
       </div>
     </div>
   </div>
+
+</div>
+
+  
 
   <div class="content">
     <div class="container">
@@ -523,8 +575,8 @@
       <template x-if="cart.length > 0">
         <div>
           <div class="delivery-info">
-            <p><strong>Delivery Fee: R20</strong></p>
-            <p><strong>Total with Delivery: R<span x-text="totalPrice() + 20"></span></strong></p>
+            <p><strong>Delivery Fee: R30</strong></p>
+            <p><strong>Total with Delivery: R<span x-text="totalPrice() + 30"></span></strong></p>
           </div>
           <button class="btn btn-primary" @click="showForm = true; showCart = false">Proceed to Checkout</button>
         </div>
@@ -556,7 +608,7 @@
         <div class="delivery-info">
           <p><strong>Subtotal: R<span x-text="totalPrice()"></span></strong></p>
           <p><strong>Delivery Fee: R20</strong></p>
-          <p><strong>Total: R<span x-text="totalPrice() + 20"></span></strong></p>
+          <p><strong>Total: R<span x-text="totalPrice() + 30"></span></strong></p>
         </div>
 
         <button type="submit" class="btn btn-primary">Send Order via WhatsApp</button>
@@ -655,8 +707,8 @@
 
           const message = `*New Order from Emnandilicious Menu*\n\n` +
                         `*Items:*\n${items}\n\n` +
-                        `*Delivery Fee:* R20\n` +
-                        `*Total:* R${this.totalPrice() + 15}\n\n` +
+                        `*Delivery Fee:* R30\n` +
+                        `*Total:* R${this.totalPrice() + 30}\n\n` +
                         `*Customer Details*\n` +
                         `Name: ${this.user.name}\n` +
                         `Phone: ${this.user.phone}\n` +
