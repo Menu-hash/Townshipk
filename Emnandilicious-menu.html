@@ -465,69 +465,51 @@
 >
 
   <!-- STICKY HEADER -->
-  <header 
-    x-show="showSticky"
-    style="position: sticky; top: 0; z-index: 50; background-color: black; text-align: center; padding: 1rem; color: white;"
-  >
-    <img 
-      src="static/images/emnandilicious/Gimba.jpg" 
-      alt="Emnandilicious" 
-      style="max-width: 100%; height: auto;"
-    >
+<!-- HEADER (Non-Sticky) -->
+<header
+  x-show="showSticky"
+  style="background-color: black; text-align: center; padding: 1rem; color: white;"
+>
+  <img
+    src="static/images/emnandilicious/Gimba.jpg"
+    alt="Emnandilicious"
+    style="max-width: 100%; height: auto;"
+  >                                  
+  <div style="font-size: 1.5rem; font-weight: bold;">Emnandilicious Menu</div>
 
-    <div style="font-size: 1.5rem; font-weight: bold;">Emnandilicious Menu</div>
-
-    <div style="font-size: 0.85rem; margin-top: 0.2rem; display: flex; align-items: center; justify-content: center;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white" viewBox="0 0 16 16" style="margin-right: 5px;">
-        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
-      </svg>
-      <span>Noto Shell, Thema Road, Kwa-Thema</span>
-    </div>
-  </header>
-
+  <div style="font-size: 0.85rem; margin-top: 0.2rem; display: flex; align-items: center; justify-content: center;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white" viewBox="0 0 16 16" style="margin-right: 5px;">
+      <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+    </svg>
+    <span>Noto Shell, Thema Road, Kwa-Thema</span>
+  </div>
+</header>
   <!-- STICKY TABS -->
-  <div 
-    x-show="showSticky" 
-    style="position: sticky; top: 130px; z-index: 40; background: white;"
-  >
+<div class="sticky-tabs">
     <div class="tabs-container">
-      <div class="tabs" style="display: flex; justify-content: center; padding: 0.5rem;">
-        <div 
-          class="tab" 
-          :class="{ 'active': activeCategory === 'All' }" 
-          @click="filterCategory('All')"
-        >
-          All
-        </div>
-        <template x-for="cat in categories" :key="cat">
-          <div 
-            class="tab" 
-            :class="{ 'active': activeCategory === cat }" 
-            @click="filterCategory(cat)" 
-            x-text="cat"
-          ></div>
+      <div class="tabs">
+        <div class="tab" :class="{ 'active': activeCategory === 'All' }" @click="filterCategory('All')">All</div>
+        <template x-for="cat in categories">
+          <div class="tab" :class="{ 'active': activeCategory === cat }" @click="filterCategory(cat)" x-text="cat"></div>
         </template>
       </div>
     </div>
   </div>
 
-</div>
-
-  
-
   <div class="content">
     <div class="container">
       <div class="product-grid">
-        <template x-for="item in filteredProducts" :key="item.name">
-          <div class="product">
-            <img class="product-img" :src="item.image" :alt="item.name" loading="lazy">
-            <div class="product-info">
-              <h3 class="product-name" x-text="item.name"></h3>
-              <div class="product-category" x-text="item.category"></div>
-              <div class="product-price" x-text="'R' + item.price"></div>
-              <button class="add-to-cart" @click="addToCart(item)">Add to Cart</button>
-            </div>
-          </div>
+<template x-for="item in filteredProducts" :key="item.name">
+  <div class="product">
+    <img class="product-img" :src="item.image" :alt="item.name" loading="lazy">
+    <div class="product-info">
+      <h3 class="product-name" x-text="item.name"></h3>
+      <div class="product-category" x-text="item.category"></div>
+      <div class="product-price">R<span x-text="item.price"></span></div>
+      <button class="add-to-cart" @click="addToCart(item)">Add to Cart</button>
+    </div>
+  </div>
+</template>
         </template>
       </div>
     </div>
@@ -607,7 +589,7 @@
 
         <div class="delivery-info">
           <p><strong>Subtotal: R<span x-text="totalPrice()"></span></strong></p>
-          <p><strong>Delivery Fee: R20</strong></p>
+          <p><strong>Delivery Fee: R30</strong></p>
           <p><strong>Total: R<span x-text="totalPrice() + 30"></span></strong></p>
         </div>
 
