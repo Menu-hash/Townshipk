@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Intake Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #333;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Patient Registration Form</h2>
+  <form onsubmit="alert('Form submitted (not connected to backend)'); return false;">
+    
+    <label>Full Name:</label>
+    <input type="text" name="full_name" required>
+
+    <label>ID/Passport Number:</label>
+    <input type="text" name="id_number" required>
+
+    <label>Date of Birth:</label>
+    <input type="date" name="dob" required>
+
+    <label>Gender:</label>
+    <select name="gender" required>
+      <option value="">--Select--</option>
+      <option>Female</option>
+      <option>Male</option>
+      <option>Other</option>
+    </select>
+
+    <label>Phone Number:</label>
+    <input type="tel" name="phone" required>
+
+    <label>Address:</label>
+    <textarea name="address" rows="2"></textarea>
+
+    <label>Allergies:</label>
+    <input type="text" name="allergies">
+
+    <label>Chronic Conditions:</label>
+    <input type="text" name="conditions">
+
+    <h2>Visit Details</h2>
+
+    <label>Date of Visit:</label>
+    <input type="date" name="visit_date" required>
+
+    <label>Reason for Visit:</label>
+    <textarea name="reason" rows="2"></textarea>
+
+    <label>Vitals:</label>
+    <input type="text" name="bp" placeholder="Blood Pressure (e.g. 120/80)">
+    <input type="text" name="temp" placeholder="Temperature (°C)">
+    <input type="text" name="pulse" placeholder="Pulse (bpm)">
+
+    <label>Diagnosis:</label>
+    <textarea name="diagnosis" rows="2"></textarea>
+
+    <label>Treatment Given:</label>
+    <textarea name="treatment" rows="2"></textarea>
+
+    <label>Medication Prescribed:</label>
+    <textarea name="medication" rows="2"></textarea>
+
+    <label>Follow-up Required?</label>
+    <select name="follow_up">
+      <option value="No">No</option>
+      <option value="Yes">Yes</option>
+    </select>
+
+    <label>Next Appointment:</label>
+    <input type="date" name="next_appointment">
+
+    <button type="submit">Submit</button>
+
+  </form>
+
+</body>
+</html>
