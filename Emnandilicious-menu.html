@@ -617,17 +617,11 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Township</label>
-                    <select x-model="user.township" required @change="updateTotals()">
-                        <option value="">-- Select Township --</option>
-                        <option value="Kwa Thema">Kwa Thema</option>
-                        <option value="Springs">Springs</option>
-                        <option value="Wright Park">Wright Park</option>
-                        <option value="Selcourt Estate">Selcourt Estate</option>
-                        <option value="Hlanganani">Hlanganani</option>
-                        <option value="Sharon Park">Sharon Park</option>
-                        <option value="Tsakane">Tsakane</option>
-                    </select>
+                    <label for="township">Township</label>
+<select id="township" x-model="user.township" required>
+    <option value="">-- Select Township --</option>
+    <option value="Kwa Thema">Kwa Thema</option>
+</select>
                 </div>
                 
                 <!-- Honeypot -->
